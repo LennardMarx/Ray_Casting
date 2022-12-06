@@ -15,6 +15,7 @@ void Rectangle::setPos(float _x, float _y)
 {
     x = _x;
     y = _y;
+    storeWalls(); // update walls
 }
 std::array<float, 2> Rectangle::getPos()
 {
@@ -27,6 +28,7 @@ void Rectangle::setSize(float _w, float _h)
 {
     w = _w;
     h = _h;
+    storeWalls(); // update walls
 }
 std::array<float, 2> Rectangle::getSize()
 {
@@ -39,8 +41,8 @@ void Rectangle::draw(UI &ui)
 {
     ui.drawLine(x, y, x, y+h);
     ui.drawLine(x, y, x+w, y);
-    ui.drawLine(x+w, y+h, x+w, y);
-    ui.drawLine(x+w, y+h, x, y+h);
+    ui.drawLine(x+w, y, x+w, y+h);
+    ui.drawLine(x, y+h, x+w, y+h);
 
     // ui.drawLine(x-w/2, y-h/2, x-w/2, y+h/2);
     // ui.drawLine(x-w/2, y-h/2, x+w/2, y-h/2);
@@ -50,6 +52,10 @@ void Rectangle::draw(UI &ui)
 
 void Rectangle::storeWalls()
 {
+    while(!rect_walls.empty())
+    {
+        rect_walls.pop_back();
+    }
     rect_walls.push_back({x, y, x, y+h});
     rect_walls.push_back({x, y, x+w, y});
     rect_walls.push_back({x+w, y, x+w, y+h});
