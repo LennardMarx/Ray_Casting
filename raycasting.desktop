@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Ray Casting
+Type=Application
+Exec=/home/lennard/Projects/RayCasting/bin/raycasting
+Icon=/home/lennard/Projects/RayCasting/resources/rayCastingIcon.png
+Terminal=false
