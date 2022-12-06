@@ -9,25 +9,25 @@
 class Rectangle
 {
 public:
-    Rectangle(int, int, int, int);
+    Rectangle(float, float, float, float);
     ~Rectangle();
 
-    void setPos(int, int);
-    std::array<int, 2> getPos();
+    void setPos(float, float);
+    std::array<float, 2> getPos();
 
-    void setSize(int, int);
-    std::array<int, 2> getSize();
+    void setSize(float, float);
+    std::array<float, 2> getSize();
 
     void draw(UI &ui);
 
     void storeWalls();
-    std::vector<std::array<int, 4>> getWalls();
+    std::vector<std::array<float, 4>> getWalls();
 
 private:
-    int x, y, w, h;
-    std::array<int, 2> pos;
-    std::array<int, 2> size;
-    std::vector<std::array<int, 4>> walls;
+    float x, y, w, h;
+    std::array<float, 2> pos;
+    std::array<float, 2> size;
+    std::vector<std::array<float, 4>> rect_walls;
 };
 
 #endif

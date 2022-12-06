@@ -6,8 +6,8 @@
 class UI
 {
 public:
-    const int sizeX;
-    const int sizeY;
+    const float sizeX;
+    const float sizeY;
 
     UI(int, int);
 

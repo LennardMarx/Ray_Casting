@@ -1,0 +1,10 @@
+# PDFs
+*.pdf
+
+# GIMP files
+*.xcf
+
+# Directories
+
+# .desktop files
+*.desktop

@@ -5,39 +5,66 @@
 #include <unistd.h>
 
 #include "../include/UI.h"
-#include "../include/border.h"
 #include "../include/lightSource.h"
 #include "../include/rectangle.h"
 
 int main()
 {
-        chdir(SDL_GetBasePath());
+    chdir(SDL_GetBasePath());
     srand((unsigned int)time(NULL));
 
     UI ui{1200, 800};
 
-    const int FPS = 50;                // set FPS
+    const int FPS = 60;                // set FPS
     const int frameDelay = 1000 / FPS; // delay according to FPS
     Uint32 frameStart;                 // keeps track of time (?)
     int frameTime;
+    
+    std::vector<std::array<float, 4>> walls;
+    // add screen borders
+    walls.push_back({-ui.sizeX/2-1, -ui.sizeY/2-1, -ui.sizeX/2-1, ui.sizeY/2+1});
+    walls.push_back({-ui.sizeX/2-1, -ui.sizeY/2-1, ui.sizeX/2+1, -ui.sizeY/2-1});
+    walls.push_back({ui.sizeX/2+1, ui.sizeY/2+1, -ui.sizeX/2-1, ui.sizeY/2+1});
+    walls.push_back({ui.sizeX/2+1, ui.sizeY/2+1, ui.sizeX/2+1, -ui.sizeY/2-1});
+    
 
-    std::vector<Border *> borders;
-    for (int i = 0; i < 1; ++i)
-    {
-        borders.push_back(new Border);
-        borders.at(i)->setRandCoords(ui);
-    }
-
-    std::vector<std::array<int, 4>> walls;
-
-    Rectangle rectangle(-100, -100, 200, 200);
+    Rectangle rectangle(-400, -200, 200, 200);
+    Rectangle rectangle2(0, 100, 250, 250);
+    Rectangle rectangle3(150, -300, 150, 150);
+    Rectangle rectangle4(-500, 300, 50, 50);
     // following append not working!!
     //walls.insert(walls.end(), rectangle.getWalls().begin(), rectangle.getWalls().end()); // append walls vectors
-    for (int i = 0; i < rectangle.getWalls().size(); i++)
-    {
-        walls.push_back(rectangle.getWalls().at(i));
-    }
+    // for (int i = 0; i < 4; i++)
+    // {
+    //     walls.push_back(rectangle.getWalls().at(i));
+    //     walls.push_back(rectangle2.getWalls().at(i));
+    //     walls.push_back(rectangle3.getWalls().at(i));
+    // }
 
+    walls.push_back(rectangle.getWalls().at(0));
+    walls.push_back(rectangle.getWalls().at(1));    
+    walls.push_back(rectangle.getWalls().at(2));
+    walls.push_back(rectangle.getWalls().at(3));
+    walls.push_back(rectangle2.getWalls().at(0));
+    walls.push_back(rectangle2.getWalls().at(1));
+    walls.push_back(rectangle2.getWalls().at(2));
+    walls.push_back(rectangle2.getWalls().at(3));
+    walls.push_back(rectangle3.getWalls().at(0));
+    walls.push_back(rectangle3.getWalls().at(1));
+    walls.push_back(rectangle3.getWalls().at(2));
+    walls.push_back(rectangle3.getWalls().at(3));
+    walls.push_back(rectangle4.getWalls().at(0));
+    walls.push_back(rectangle4.getWalls().at(1));
+    walls.push_back(rectangle4.getWalls().at(2));
+    walls.push_back(rectangle4.getWalls().at(3));
+    // for (int i = 0; i < rectangle3.getWalls().size(); i++)
+    // {
+        // walls.push_back(rectangle3.getWalls().at(i));
+    // }
+    // for (int i = 0; i < rectangle2.getWalls().size(); i++)
+    // {
+        // walls.push_back(rectangle2.getWalls().at(i));
+    // }
 
     LightSource lightSource;
     Uint32 mouseState;
@@ -62,8 +89,11 @@ int main()
             ui.clear(); // render screen black
 
             rectangle.draw(ui);
+            rectangle2.draw(ui);
+            rectangle3.draw(ui);
+            rectangle4.draw(ui);
 
-            SDL_PumpEvents();
+            // SDL_PumpEvents();
             mouseState = SDL_GetMouseState(&x, &y);
             lightSource.setPosition(ui, x, y);
             lightSource.emitLight(ui, walls);

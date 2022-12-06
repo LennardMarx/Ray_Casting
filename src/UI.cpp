@@ -61,7 +61,7 @@ void UI::initialize(int sizeX, int sizeY)
     SDL_Init(SDL_INIT_EVERYTHING);
     // Create a Window
     window = SDL_CreateWindow("Ray Casting", 0, 0, sizeX, sizeY, SDL_WINDOW_SHOWN);
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED); // | SDL_RENDERER_PRESENTVSYNC
     // scale window
     // SDL_SetWindowSize(window, sizeX * 3, sizeY * 3);
     // adjust render scale

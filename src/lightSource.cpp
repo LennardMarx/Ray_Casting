@@ -2,9 +2,9 @@
 #include <cmath>
 #include <utility>
 #include <vector>
+#include <array>
 
 #include "../include/UI.h"
-#include "../include/border.h"
 #include "../include/lightSource.h"
 
 LightSource::LightSource() {}
@@ -21,15 +21,16 @@ std::pair<int, int> LightSource::getPosition()
     return coords;
 }
 
-std::pair<double, double> LightSource::calcIntersection()
+std::pair<float, float> LightSource::calcIntersection()
 {
-    intersection.first = x1 + t * (x2 - x1);
-    intersection.second = y1 + t * (y2 - y1);
+    intersection.first = x3 + u * (x4 - x3);
+    intersection.second = y3 + u * (y4 - y3);
     return intersection;
 }
 std::pair<float, float> LightSource::getClosestIntersection()
 {
     closestIntersection = intersections.at(0);
+    lastDistance = sqrt(pow(intersections.at(0).second - coords.second, 2) + pow(intersections.at(0).first - coords.first, 2));
     for (int i = 0; i < intersections.size(); i++)
     {
         distance = sqrt(pow(intersections.at(i).second - coords.second, 2) + pow(intersections.at(i).first - coords.first, 2));
@@ -42,7 +43,7 @@ std::pair<float, float> LightSource::getClosestIntersection()
     return closestIntersection;
 }
 
-void LightSource::calcIntersections(std::vector<std::array<int, 4>> _walls)
+void LightSource::calcIntersections(std::vector<std::array<float, 4>> &_walls)
 {
     for (int i = 0; i < _walls.size(); i++)
     {
@@ -61,34 +62,33 @@ void LightSource::calcIntersections(std::vector<std::array<int, 4>> _walls)
         }
         t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denom;
         u = ((x1 - x3) * (y1 - y2) - (y1 - y3) * (x1 - x2)) / denom;
-        if (0 < t && t < 1 && u > 0)
+        if (0 < t && t < 1 && u > 0 && u < 1)
         {
-            intersections.push_back(calcIntersection());
+            intersection = calcIntersection();
+            intersections.push_back(intersection);
         }
     }
 }
-void LightSource::emitLight(UI &ui, std::vector<std::array<int, 4>> &_walls)
+void LightSource::emitLight(UI &ui, std::vector<std::array<float, 4>> &_walls)
 {
-    ui.setDrawColor(255, 255, 255, 30);
+    ui.setDrawColor(255, 255, 255, 200);
     for (int i = 0; i < 360; i = i + 2)
     {
         x = coords.first;
         y = coords.second;
         ang = i * pi / 180;
-        c1 = x + ui.sizeY * 2 * cos(ang); // coords outside of screen
-        c2 = y + ui.sizeY * 2 * sin(ang);
+        // coords outside of screen (needed for calculation of intersection!)
+        c1 = x + 10000*cos(ang); 
+        c2 = y + 10000*sin(ang);
           
         calcIntersections(_walls);
-        
+        intersection = getClosestIntersection();
         if (!intersections.empty())
         {
-            ui.drawLine(x, y, getClosestIntersection().first, getClosestIntersection().second);
+            // drawing 50 pixels away from center to not have bright overlapping
+            ui.drawLine(x+cos(ang)*50, y+sin(ang)*50, intersection.first, intersection.second);
         }
-        else
-        {
-            // GET RID OF THAT BY GIVING SCREEN BORDERS!
-            ui.drawLine(x, y, c1, c2); // to a place outside of screen
-        }
+
         // clear intersections
         while (!intersections.empty())
         {
