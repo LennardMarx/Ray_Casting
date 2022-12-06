@@ -31,15 +31,15 @@ std::pair<float, float> LightSource::getClosestIntersection()
 {
     // closestIntersection = intersections.at(0);
     // lastDistance = sqrt(pow(intersections.at(0).second - coords.second, 2) + pow(intersections.at(0).first - coords.first, 2));
-    lastDistance = 1000000;
+    closestDistance = 1000000;
     for (int i = 0; i < intersections.size(); i++)
     {
         distance = sqrt(pow(intersections.at(i).second - coords.second, 2) + pow(intersections.at(i).first - coords.first, 2));
-        if (distance < lastDistance)
+        if (distance < closestDistance)
         {
+            closestDistance = distance;
             closestIntersection = intersections.at(i);
         }
-        lastDistance = distance;
     }
     return closestIntersection;
 }
@@ -73,7 +73,7 @@ void LightSource::calcIntersections(std::vector<std::array<float, 4>> &_walls)
 void LightSource::emitLight(UI &ui, std::vector<std::array<float, 4>> &_walls)
 {
     ui.setDrawColor(255, 255, 255, 200);
-    for (int i = 0; i < 360; i = i + 2)
+    for (int i = 0; i < 360; i = i + 1)
     {
         x = coords.first;
         y = coords.second;

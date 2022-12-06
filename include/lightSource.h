@@ -35,7 +35,7 @@ private:
 
     std::pair<float, float> intersection;
     std::pair<float, float> closestIntersection;
-    float distance, lastDistance = 0;
+    float distance, lastDistance = 0, closestDistance;
     std::vector<std::pair<float, float>> intersections;
 };
 

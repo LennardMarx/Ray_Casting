@@ -28,35 +28,36 @@ int main()
     walls.push_back({ui.sizeX/2+1, -ui.sizeY/2-1, ui.sizeX/2+1, ui.sizeY/2+1});
 
     Rectangle rectangle1(-400, -200, 200, 200);
-    Rectangle rectangle2(150, -300, 250, 250);
-    Rectangle rectangle3(0, 150, 200, 200);
-    Rectangle rectangle4(-500, 300, 200, 200);
-    rectangle2.setPos(-150, -300);
+    Rectangle rectangle2(0, 100, 250, 250);
+    Rectangle rectangle3(150, -300, 150, 150);
+    Rectangle rectangle4(-500, 200, 100, 100);
+
     // following append not working!!
     //walls.insert(walls.end(), rectangle.getWalls().begin(), rectangle.getWalls().end()); // append walls vectors
-    // for (int i = 0; i < 4; i++)
-    // {
-    //     walls.push_back(rectangle.getWalls().at(i));
-    //     walls.push_back(rectangle2.getWalls().at(i));
-    //     walls.push_back(rectangle3.getWalls().at(i));
-    // }
+    for (int i = 0; i < 4; i++)
+    {
+        walls.push_back(rectangle1.getWalls().at(i));
+        walls.push_back(rectangle2.getWalls().at(i));
+        walls.push_back(rectangle3.getWalls().at(i));
+        walls.push_back(rectangle4.getWalls().at(i));
+    }
 
-    walls.push_back(rectangle1.getWalls().at(0));
-    walls.push_back(rectangle1.getWalls().at(1));    
-    walls.push_back(rectangle1.getWalls().at(2));
-    walls.push_back(rectangle1.getWalls().at(3));
-    walls.push_back(rectangle2.getWalls().at(0));
-    walls.push_back(rectangle2.getWalls().at(1));
-    walls.push_back(rectangle2.getWalls().at(2));
-    walls.push_back(rectangle2.getWalls().at(3));
-    walls.push_back(rectangle3.getWalls().at(0));
-    walls.push_back(rectangle3.getWalls().at(1));
-    walls.push_back(rectangle3.getWalls().at(2));
-    walls.push_back(rectangle3.getWalls().at(3));
-    walls.push_back(rectangle4.getWalls().at(0));
-    walls.push_back(rectangle4.getWalls().at(1));
-    walls.push_back(rectangle4.getWalls().at(2));
-    walls.push_back(rectangle4.getWalls().at(3));
+    // walls.push_back(rectangle1.getWalls().at(0));
+    // walls.push_back(rectangle1.getWalls().at(1));    
+    // walls.push_back(rectangle1.getWalls().at(2));
+    // walls.push_back(rectangle1.getWalls().at(3));
+    // walls.push_back(rectangle2.getWalls().at(0));
+    // walls.push_back(rectangle2.getWalls().at(1));
+    // walls.push_back(rectangle2.getWalls().at(2));
+    // walls.push_back(rectangle2.getWalls().at(3));
+    // walls.push_back(rectangle3.getWalls().at(0));
+    // walls.push_back(rectangle3.getWalls().at(1));
+    // walls.push_back(rectangle3.getWalls().at(2));
+    // walls.push_back(rectangle3.getWalls().at(3));
+    // walls.push_back(rectangle4.getWalls().at(0));
+    // walls.push_back(rectangle4.getWalls().at(1));
+    // walls.push_back(rectangle4.getWalls().at(2));
+    // walls.push_back(rectangle4.getWalls().at(3));
     
     // for (int i = 0; i < rectangle3.getWalls().size(); i++)
     // {
