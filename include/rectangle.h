@@ -5,6 +5,8 @@
 
 #include <array>
 #include <vector>
+#include "../include/UI.h"
+
 
 class Rectangle
 {
@@ -18,7 +20,7 @@ public:
     void setSize(float, float);
     std::array<float, 2> getSize();
 
-    void draw(UI &ui);
+    void draw(UI& ui);
 
     void storeWalls();
     std::vector<std::array<float, 4>> getWalls();

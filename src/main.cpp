@@ -13,22 +13,22 @@ int main()
     chdir(SDL_GetBasePath());
     srand((unsigned int)time(NULL));
 
-    UI ui{1200, 800};
+    UI ui{ 1200, 800 };
 
-    const int FPS = 60;                // set FPS
+    const int FPS = 100;                // set FPS
     const int frameDelay = 1000 / FPS; // delay according to FPS
     Uint32 frameStart;                 // keeps track of time (?)
     int frameTime;
-    
+
     std::vector<std::array<float, 4>> walls;
     // add screen borders
-    walls.push_back({-ui.sizeX/2-1, -ui.sizeY/2-1, -ui.sizeX/2-1, ui.sizeY/2+1});
-    walls.push_back({-ui.sizeX/2-1, -ui.sizeY/2-1, ui.sizeX/2+1, -ui.sizeY/2-1});
-    walls.push_back({-ui.sizeX/2-1, ui.sizeY/2+1, ui.sizeX/2+1, ui.sizeY/2+1});
-    walls.push_back({ui.sizeX/2+1, -ui.sizeY/2-1, ui.sizeX/2+1, ui.sizeY/2+1});
+    walls.push_back({ -ui.sizeX / 2 - 1, -ui.sizeY / 2 - 1, -ui.sizeX / 2 - 1, ui.sizeY / 2 + 1 });
+    walls.push_back({ -ui.sizeX / 2 - 1, -ui.sizeY / 2 - 1, ui.sizeX / 2 + 1, -ui.sizeY / 2 - 1 });
+    walls.push_back({ -ui.sizeX / 2 - 1, ui.sizeY / 2 + 1, ui.sizeX / 2 + 1, ui.sizeY / 2 + 1 });
+    walls.push_back({ ui.sizeX / 2 + 1, -ui.sizeY / 2 - 1, ui.sizeX / 2 + 1, ui.sizeY / 2 + 1 });
 
     Rectangle rectangle1(-400, -200, 200, 200);
-    Rectangle rectangle2(0, 100, 250, 250);
+    Rectangle rectangle2(0, 50, 250, 250);
     Rectangle rectangle3(150, -300, 150, 150);
     Rectangle rectangle4(-500, 200, 100, 100);
 
@@ -42,39 +42,13 @@ int main()
         walls.push_back(rectangle4.getWalls().at(i));
     }
 
-    // walls.push_back(rectangle1.getWalls().at(0));
-    // walls.push_back(rectangle1.getWalls().at(1));    
-    // walls.push_back(rectangle1.getWalls().at(2));
-    // walls.push_back(rectangle1.getWalls().at(3));
-    // walls.push_back(rectangle2.getWalls().at(0));
-    // walls.push_back(rectangle2.getWalls().at(1));
-    // walls.push_back(rectangle2.getWalls().at(2));
-    // walls.push_back(rectangle2.getWalls().at(3));
-    // walls.push_back(rectangle3.getWalls().at(0));
-    // walls.push_back(rectangle3.getWalls().at(1));
-    // walls.push_back(rectangle3.getWalls().at(2));
-    // walls.push_back(rectangle3.getWalls().at(3));
-    // walls.push_back(rectangle4.getWalls().at(0));
-    // walls.push_back(rectangle4.getWalls().at(1));
-    // walls.push_back(rectangle4.getWalls().at(2));
-    // walls.push_back(rectangle4.getWalls().at(3));
-    
-    // for (int i = 0; i < rectangle3.getWalls().size(); i++)
-    // {
-        // walls.push_back(rectangle3.getWalls().at(i));
-    // }
-    // for (int i = 0; i < rectangle2.getWalls().size(); i++)
-    // {
-        // walls.push_back(rectangle2.getWalls().at(i));
-    // }
-
     LightSource lightSource;
     Uint32 mouseState;
     int x, y;
 
     bool pause = false;
     bool quit = false;
-    
+
     SDL_Event event;
 
     while (!quit)
@@ -101,7 +75,7 @@ int main()
             lightSource.emitLight(ui, walls);
 
             ui.present(); // render screen
-        }                 // end else (pause game)
+        }     // end else (pause game)
 
         while (SDL_PollEvent(&event))
         {

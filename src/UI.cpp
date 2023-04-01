@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include "../include/UI.h"
 
-UI::UI(int sizeX, int sizeY) : sizeX(sizeX), sizeY(sizeY)
+UI::UI(int sizeX, int sizeY): sizeX(sizeX), sizeY(sizeY)
 {
     initialize(sizeX, sizeY);
 }

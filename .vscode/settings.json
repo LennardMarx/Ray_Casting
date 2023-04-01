@@ -62,10 +62,5 @@
     "stop_token": "cpp",
     "thread": "cpp",
     "valarray": "cpp"
-  },
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": false,
-  //"editor.defaultFormatter": "esbenp.prettier-vscode",
-  "C_Cpp.formatting": "clangFormat",
-  "clang-format.executable": "home/lennard/.vscode/extensions/xaver.clang-format-1.9.0/clang-format"
+  }
 }

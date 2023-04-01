@@ -1,10 +1,9 @@
 #include <SDL2/SDL.h>
 #include <array>
-#include "../include/UI.h"
 #include "../include/rectangle.h"
 
 
-Rectangle::Rectangle(float _x, float _y, float _w, float _h) : x(_x), y(_y), w(_w), h(_h)
+Rectangle::Rectangle(float _x, float _y, float _w, float _h): x(_x), y(_y), w(_w), h(_h)
 {
     // defineWalls();
     storeWalls();
@@ -37,12 +36,12 @@ std::array<float, 2> Rectangle::getSize()
     return size;
 }
 
-void Rectangle::draw(UI &ui)
+void Rectangle::draw(UI& ui)
 {
-    ui.drawLine(x, y, x, y+h);
-    ui.drawLine(x, y, x+w, y);
-    ui.drawLine(x+w, y, x+w, y+h);
-    ui.drawLine(x, y+h, x+w, y+h);
+    ui.drawLine(x, y, x, y + h);
+    ui.drawLine(x, y, x + w, y);
+    ui.drawLine(x + w, y, x + w, y + h);
+    ui.drawLine(x, y + h, x + w, y + h);
 
     // ui.drawLine(x-w/2, y-h/2, x-w/2, y+h/2);
     // ui.drawLine(x-w/2, y-h/2, x+w/2, y-h/2);
@@ -52,14 +51,15 @@ void Rectangle::draw(UI &ui)
 
 void Rectangle::storeWalls()
 {
-    while(!rect_walls.empty())
+    while (!rect_walls.empty())
     {
         rect_walls.pop_back();
     }
-    rect_walls.push_back({x, y, x, y+h});
-    rect_walls.push_back({x, y, x+w, y});
-    rect_walls.push_back({x+w, y, x+w, y+h});
-    rect_walls.push_back({x, y+h, x+w, y+h});
+    // overlapping edges to prevent rays from shining through
+    rect_walls.push_back({ x, y - 1, x, y + h + 1 });
+    rect_walls.push_back({ x - 1, y, x + w + 1, y });
+    rect_walls.push_back({ x + w, y - 1, x + w, y + h + 1 });
+    rect_walls.push_back({ x - 1, y + h, x + w + 1, y + h });
 }
 
 std::vector<std::array<float, 4>> Rectangle::getWalls()

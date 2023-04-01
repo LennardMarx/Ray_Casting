@@ -10,7 +10,7 @@
 LightSource::LightSource() {}
 LightSource::~LightSource() {}
 
-void LightSource::setPosition(UI &ui, int _x, int _y)
+void LightSource::setPosition(UI& ui, int _x, int _y)
 {
     coords.first = _x - ui.sizeX / 2;
     coords.second = _y - ui.sizeY / 2;
@@ -44,7 +44,7 @@ std::pair<float, float> LightSource::getClosestIntersection()
     return closestIntersection;
 }
 
-void LightSource::calcIntersections(std::vector<std::array<float, 4>> &_walls)
+void LightSource::calcIntersections(std::vector<std::array<float, 4>>& _walls)
 {
     for (int i = 0; i < _walls.size(); i++)
     {
@@ -70,7 +70,7 @@ void LightSource::calcIntersections(std::vector<std::array<float, 4>> &_walls)
         }
     }
 }
-void LightSource::emitLight(UI &ui, std::vector<std::array<float, 4>> &_walls)
+void LightSource::emitLight(UI& ui, std::vector<std::array<float, 4>>& _walls)
 {
     ui.setDrawColor(255, 255, 255, 200);
     for (int i = 0; i < 360; i = i + 1)
@@ -79,22 +79,22 @@ void LightSource::emitLight(UI &ui, std::vector<std::array<float, 4>> &_walls)
         y = coords.second;
         ang = i * pi / 180;
         // coords outside of screen (needed for calculation of intersection!)
-        c1 = x + 10000*cos(ang); 
-        c2 = y + 10000*sin(ang);
-          
+        c1 = x + 10000 * cos(ang);
+        c2 = y + 10000 * sin(ang);
+
         calcIntersections(_walls);
         intersection = getClosestIntersection();
         if (!intersections.empty())
         {
             // drawing 50 pixels away from center to not have bright overlapping
-            ui.drawLine(x+cos(ang)*50, y+sin(ang)*50, intersection.first, intersection.second);
+            ui.drawLine(x + cos(ang) * 45, y + sin(ang) * 45, intersection.first, intersection.second);
         }
 
         // clear intersections
         while (!intersections.empty())
         {
-           intersections.pop_back();
+            intersections.pop_back();
         }
-        intersection = {0, 0};
+        intersection = { 0, 0 };
     }
 }
